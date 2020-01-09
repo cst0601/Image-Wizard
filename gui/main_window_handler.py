@@ -105,12 +105,16 @@ class MainWindowHandler:
         self.builder.get_object("instance_tree_view").set_model(model)
 
     def selectInstance (self, userData):
-        selectedRows = self.builder.get_object("instance_selection").get_selected_rows()
-        if len(selectedRows[1]) == 0:
+        selectedRows = self.builder.get_object("instance_selection").get_selected_rows()[1]
+        if len(selectedRows) == 0:
             return
-        for selected in selectedRows:
-            print("Is this possible to have someting in {}".format(selected))
-        selectedIndex = self.builder.get_object("instance_selection").get_selected_rows()[1][0][0]
+
+        selectedIndex = []
+        for index in selectedRows:
+            selectedIndex.append(index[0])
+
+        #selectedIndex = selectedRows
+        print("The selected index is {}".format(selectedIndex))
         self.model.setSelectedInstanceIndex(selectedIndex)
         self.redrawMainImage(self.model.drawRectOnSelected())
 

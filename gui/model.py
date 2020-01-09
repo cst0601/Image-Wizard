@@ -79,11 +79,12 @@ class Model:
     def drawRectOnSelected (self):
         image = self.image.copy()
 
-        if self.selectedInstIndex is not None:
-            selectedInstance = self.root.getChildByIndex(self.selectedInstIndex)
-            topLeftXY = selectedInstance.position() # get the top left and botton right for rect drawing
-            bottomRightXY = selectedInstance.size()
-            cv.rectangle(image, topLeftXY, bottomRightXY, (0, 255, 0), 3)
+        if len(self.selectedInstIndex) != 0:
+            for index in self.selectedInstIndex:
+                selectedInstance = self.root.getChildByIndex(index)
+                topLeftXY = selectedInstance.position() # get the top left and botton right for rect drawing
+                bottomRightXY = selectedInstance.size()
+                cv.rectangle(image, topLeftXY, bottomRightXY, (0, 255, 0), 3)
         image = self.resizeByPercentage(image)
 
         return self.imageToGdkPixBuf(image)
@@ -101,16 +102,17 @@ class Model:
     def applyEffect (self):
         self.undoRoot = copy.deepcopy(self.root)
 
-        selectedInstance = self.root.getChildByIndex(self.selectedInstIndex)
-        if (self.selectedEffectName == "blur"):
-            #selectedInstance.setEffect(effect.BlurEffect())    # original method
-            self.root.setChildByIndex(self.selectedInstIndex, newBlurEffect.blurEffect(self.root.generate_image(), self.maskResults, self.selectedInstIndex, self.filterSize))
-        elif (self.selectedEffectName == "gray"):
-            selectedInstance.setEffect(effect.GrayEffect())
-        elif (self.selectedEffectName == "binarization"):
-            selectedInstance.setEffect(effect.Binarization(threshold=self.binarizationThreshold))
-        else:
-            print("not such effect")
+        for index in self.selectedInstIndex:
+            selectedInstance = self.root.getChildByIndex(index)
+            if (self.selectedEffectName == "blur"):
+                #selectedInstance.setEffect(effect.BlurEffect())    # original method
+                self.root.setChildByIndex(index, newBlurEffect.blurEffect(self.root.generate_image(), self.maskResults, index, self.filterSize))
+            elif (self.selectedEffectName == "gray"):
+                selectedInstance.setEffect(effect.GrayEffect())
+            elif (self.selectedEffectName == "binarization"):
+                selectedInstance.setEffect(effect.Binarization(threshold=self.binarizationThreshold))
+            else:
+                print("not such effect")
         self.imageModified = True
         self.updateImage()
 
