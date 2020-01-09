@@ -1,0 +1,11 @@
+OpenCV_playground/*.mp4
+OpenCV_playground/*.avi
+
+__pycache__
+gui/__pycache__
+background_remove/__pycache__
+build
+dist
+main.spec
+
+mask_rcnn_coco.h5
