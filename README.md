@@ -4,13 +4,13 @@ This model is from an implementation from [matterporter/Mask_RCNN](https://githu
  \
 This is a copy of the project [ImageWizard](https://gitlab.com/f870103/mask-r-cnn-background-remove) \
 Credit of the early versions of Image Wizard goes to: \
-jysh1214, kaze (CK Lai), Chikuma (ST Chien) and scottLiu. \
+jysh1214, kaze (CK Lai), Chikuma (ST Chien) and scottLiu.
 
 ## Release v 1.5
-Image Wizard finally have a release! \
-Note that this only runs on linux distributions (only Ubuntu 18.04 is tested) \
+Image Wizard finally have a release!
+Note that this only runs on linux distributions (only Ubuntu 18.04 is tested)
 
-See releases to download. \
+See releases to download.
 
 ## Build Instructions
 1. Install pyinstaller via pip `pip3 install pyinstaller`
